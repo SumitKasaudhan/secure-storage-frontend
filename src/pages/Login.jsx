@@ -3,7 +3,6 @@ import api from "../services/api";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { GoogleLogin } from "@react-oauth/google";
 
 function Login() {
     const navigate = useNavigate();
@@ -45,7 +44,7 @@ function Login() {
 
             navigate("/app", { replace: true });
 
-        } catch {
+        } catch (err) {
             toast.error("Invalid credentials");
         } finally {
             setLoading(false);
@@ -123,29 +122,6 @@ function Login() {
                     >
                         {loading ? "Logging in..." : "Login"}
                     </button>
-
-                    {/* ✅ Modern Google login */}
-                    <div className="mb-4 flex justify-center">
-                        <GoogleLogin
-                            onSuccess={async (res) => {
-                                try {
-                                    const response = await api.post("/auth/google", {
-                                        credential: res.credential
-                                    });
-
-                                    storeToken(response.data.token);
-
-                                    toast.success("Google login successful");
-
-                                    navigate("/app", { replace: true });
-
-                                } catch (err) {
-                                    toast.error("Google login failed");
-                                }
-                            }}
-                            onError={() => toast.error("Google login failed")}
-                        />
-                    </div>
 
                     <p className="text-center text-sm">
                         Don’t have an account?{" "}
