@@ -241,46 +241,95 @@ function Home() {
 
 
             {/* ================= FEEDBACK ================= */}
-            <section className="px-6 md:px-10 py-20 text-center">
+            {/* ================= TESTIMONIALS ================= */}
+            <section className="px-6 md:px-10 py-24 text-center bg-gray-50 dark:bg-[#0b0b0d] transition-colors">
 
-                <h3 className="text-3xl font-bold mb-12">
-                    What Users Say
+                <h3 className="text-3xl md:text-4xl font-bold mb-16">
+                    Trusted by Real Users
                 </h3>
 
-                <div className="max-w-5xl mx-auto">
+                <div className="max-w-6xl mx-auto">
 
                     <Swiper
                         modules={[Autoplay]}
                         autoplay={{ delay: 3500 }}
                         loop
-                        spaceBetween={20}
-                        slidesPerView={1}
+                        spaceBetween={30}
                         breakpoints={{
-                            768: { slidesPerView: 2 },
-                            1024: { slidesPerView: 3 }
+                            640: { slidesPerView: 1 },
+                            900: { slidesPerView: 2 },
+                            1200: { slidesPerView: 3 }
                         }}
                     >
 
                         {[
-                            "Clean UI, strong encryption, fast uploads.",
-                            "Feels like enterprise security software.",
-                            "Perfect for confidential documents.",
-                            "Admin controls are excellent.",
-                            "Best encrypted storage I’ve used."
-                        ].map((review, i) => (
+                            {
+                                name: "Emma Watson",
+                                role: "Product Designer",
+                                avatar: "https://i.pravatar.cc/100?img=1",
+                                text: "SecureVault completely changed how I store sensitive files. Fast, clean, and incredibly secure."
+                            },
+                            {
+                                name: "Daniel Cruz",
+                                role: "Software Engineer",
+                                avatar: "https://i.pravatar.cc/100?img=5",
+                                text: "Encryption feels enterprise-grade. Upload speed is excellent and UI is beautiful."
+                            },
+                            {
+                                name: "Sofia Malik",
+                                role: "Startup Founder",
+                                avatar: "https://i.pravatar.cc/100?img=9",
+                                text: "Finally a storage app that respects privacy. I trust this with my business data."
+                            },
+                            {
+                                name: "James Carter",
+                                role: "Cybersecurity Analyst",
+                                avatar: "https://i.pravatar.cc/100?img=12",
+                                text: "Strong architecture, smooth experience. This feels like premium software."
+                            }
+                        ].map((t, i) => (
 
-                            <SwiperSlide key={i}>
-                                <div className="bg-white dark:bg-card p-8 rounded-xl shadow-lg">
+                            <SwiperSlide key={i} className="flex h-full">
 
-                                    <div className="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold mb-4">
-                                        Ema
+                                <div className="
+                        flex flex-col justify-between
+                        w-full
+                        min-h-[260px]  /* ✅ equal height safe version */
+                        bg-white/90 dark:bg-white/5
+                        backdrop-blur-xl
+                        border border-gray-200 dark:border-white/10
+                        rounded-xl
+                        p-8
+                        shadow-xl
+                        hover:scale-[1.03]
+                        transition
+                    ">
+
+                                    <div className="flex items-center gap-4">
+
+                                        <img
+                                            src={t.avatar}
+                                            className="w-14 h-14 rounded-full object-cover"
+                                            alt=""
+                                        />
+
+                                        <div className="text-left">
+                                            <h4 className="font-semibold text-gray-900 dark:text-white">
+                                                {t.name}
+                                            </h4>
+                                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                                {t.role}
+                                            </p>
+                                        </div>
+
                                     </div>
 
-                                    <p className="text-gray-700 dark:text-gray-300">
-                                        "{review}"
+                                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-left mt-6">
+                                        “{t.text}”
                                     </p>
 
                                 </div>
+
                             </SwiperSlide>
 
                         ))}
@@ -288,7 +337,9 @@ function Home() {
                     </Swiper>
 
                 </div>
+
             </section>
+
 
         </div>
     );
