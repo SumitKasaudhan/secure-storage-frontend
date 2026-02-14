@@ -22,6 +22,12 @@ function Signup() {
             return;
         }
 
+        // ✅ frontend password rule
+        if (password.trim().length < 5) {
+            toast.error("Password must be at least 5 characters");
+            return;
+        }
+
         try {
             setLoading(true);
 
@@ -37,7 +43,17 @@ function Signup() {
             navigate("/app", { replace: true });
 
         } catch (err) {
-            toast.error("Signup failed");
+            const message =
+                err.response?.data?.message ||
+                "Signup failed";
+
+            if (message === "User already exists") {
+                toast.error("User already exists. Please login.");
+                navigate("/login");
+            } else {
+                toast.error(message);
+            }
+
         } finally {
             setLoading(false);
         }
